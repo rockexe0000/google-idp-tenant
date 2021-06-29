@@ -1,0 +1,38 @@
+spring:
+  profiles:
+    active: "local"
+  application:
+    name: identity-service
+
+server:
+  port: 8082
+  servlet:
+    context-path: /identity
+
+logging:
+  level:
+    root: debug
+
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+
+gcp:
+  identity:
+    apiKey: ${apiKey}
+    authDomain: ${authDomain}
+    endpoint: https://identitytoolkit.googleapis.com/v2/
+    project: ${project}
+
+---
+#spring:
+#  config:
+#    activate:
+#      on-profile: dev
+#
+#gcp:
+#  identity:
+#    apiKey:
+#    authDomain:
