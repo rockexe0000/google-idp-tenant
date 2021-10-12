@@ -12,15 +12,26 @@ repositories {
 	mavenCentral()
 }
 
+ext {
+  // add
+  set('springfoxVersion', "3.0.0")
+}
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation "com.google.firebase:firebase-admin:6.11.0"
-	implementation "org.springdoc:springdoc-openapi-ui:1.5.9"
+	//implementation "org.springdoc:springdoc-openapi-ui:1.5.9"
 	implementation "com.google.auth:google-auth-library-oauth2-http:0.22.2"
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	
+	 // Swagger
+  implementation "io.springfox:springfox-boot-starter:${springfoxVersion}"
+  implementation "io.springfox:springfox-swagger-ui:${springfoxVersion}"
+  implementation "io.springfox:springfox-data-rest:${springfoxVersion}"
 }
 
 test {

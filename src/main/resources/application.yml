@@ -7,7 +7,7 @@ spring:
 server:
   port: 8082
   servlet:
-    context-path: /identity
+    context-path: /
 
 logging:
   level:
@@ -21,10 +21,10 @@ spring:
 
 gcp:
   identity:
-    apiKey: ${apiKey}
-    authDomain: ${authDomain}
+    apiKey: ${apiKey:AIzaSyC2xEH7CO8v6id73LoGxqguhaNyYam-zbA}
+    authDomain: ${authDomain:ringed-spot-316103.firebaseapp.com}
     endpoint: https://identitytoolkit.googleapis.com/v2/
-    project: ${project}
+    project: ${project:ringed-spot-316103}
 
 ---
 #spring:
