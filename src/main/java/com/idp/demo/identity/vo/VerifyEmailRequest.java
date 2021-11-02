@@ -1,4 +1,4 @@
-package com.daas.saas.investment.identity.vo;
+package com.idp.demo.identity.vo;
 
 import javax.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;

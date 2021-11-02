@@ -1,8 +1,8 @@
-package com.daas.saas.investment.identity.service;
+package com.idp.demo.identity.service;
 
-import com.daas.saas.investment.identity.vo.*;
 import com.google.auth.oauth2.AccessToken;
 import com.google.auth.oauth2.GoogleCredentials;
+import com.idp.demo.identity.vo.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

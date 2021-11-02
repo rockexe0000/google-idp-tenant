@@ -1,16 +1,18 @@
-package com.daas.saas.investment.identity.vo;
+package com.idp.demo.identity.vo;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotEmpty;
+
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
-    private String uid;
+public class CreateUserRequest {
+    @NotEmpty
     private String email;
+    @NotEmpty
+    private String password;
     private String displayName;
 }

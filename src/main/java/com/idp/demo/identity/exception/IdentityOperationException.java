@@ -1,4 +1,4 @@
-package com.daas.saas.investment.identity.exception;
+package com.idp.demo.identity.exception;
 
 public class IdentityOperationException extends RuntimeException {
 

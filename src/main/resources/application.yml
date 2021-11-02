@@ -5,13 +5,13 @@ spring:
     name: identity-service
 
 server:
-  port: 8082
+  port: 8080
   servlet:
     context-path: /
 
 logging:
   level:
-    root: debug
+    root: INFO
 
 ---
 spring:

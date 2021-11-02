@@ -1,7 +1,7 @@
-package com.daas.saas.investment.identity.controller;
+package com.idp.demo.identity.controller;
 
-import com.daas.saas.investment.identity.service.TenantService;
-import com.daas.saas.investment.identity.vo.*;
+import com.idp.demo.identity.service.TenantService;
+import com.idp.demo.identity.vo.*;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

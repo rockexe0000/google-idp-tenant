@@ -1,4 +1,4 @@
-package com.daas.saas.investment.identity.controller;
+package com.idp.demo.identity.controller;
 
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,15 +14,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import com.daas.saas.investment.identity.service.GcpIdentityService;
-import com.daas.saas.investment.identity.service.UserService;
-import com.daas.saas.investment.identity.vo.ChangePasswordRequest;
-import com.daas.saas.investment.identity.vo.CreateUserRequest;
-import com.daas.saas.investment.identity.vo.SignInRequest;
-import com.daas.saas.investment.identity.vo.User;
-import com.daas.saas.investment.identity.vo.UserToken;
-import com.daas.saas.investment.identity.vo.ValidateTokenRequest;
-import com.daas.saas.investment.identity.vo.VerifyEmailRequest;
+import com.idp.demo.identity.service.GcpIdentityService;
+import com.idp.demo.identity.service.UserService;
+import com.idp.demo.identity.vo.ChangePasswordRequest;
+import com.idp.demo.identity.vo.CreateUserRequest;
+import com.idp.demo.identity.vo.SignInRequest;
+import com.idp.demo.identity.vo.User;
+import com.idp.demo.identity.vo.UserToken;
+import com.idp.demo.identity.vo.ValidateTokenRequest;
+import com.idp.demo.identity.vo.VerifyEmailRequest;
 
 @CrossOrigin(maxAge = 3600)
 @RestController

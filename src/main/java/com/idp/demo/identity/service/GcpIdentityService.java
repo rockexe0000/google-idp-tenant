@@ -1,4 +1,4 @@
-package com.daas.saas.investment.identity.service;
+package com.idp.demo.identity.service;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -7,15 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
-import com.daas.saas.investment.identity.exception.IdentityOperationException;
-import com.daas.saas.investment.identity.vo.CreateUserRequest;
-import com.daas.saas.investment.identity.vo.User;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.UserRecord;
+import com.idp.demo.identity.exception.IdentityOperationException;
+import com.idp.demo.identity.vo.CreateUserRequest;
+import com.idp.demo.identity.vo.User;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

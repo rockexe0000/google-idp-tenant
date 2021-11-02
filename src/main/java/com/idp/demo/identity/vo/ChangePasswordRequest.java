@@ -1,4 +1,4 @@
-package com.daas.saas.investment.identity.vo;
+package com.idp.demo.identity.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,10 +9,10 @@ import javax.validation.constraints.NotEmpty;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateUserRequest {
+public class ChangePasswordRequest {
     @NotEmpty
-    private String email;
+    private String idToken;
     @NotEmpty
     private String password;
-    private String displayName;
+    private boolean returnSecureToken = true;
 }

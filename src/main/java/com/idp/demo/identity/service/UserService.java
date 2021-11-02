@@ -1,4 +1,4 @@
-package com.daas.saas.investment.identity.service;
+package com.idp.demo.identity.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -6,11 +6,11 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import com.daas.saas.investment.identity.vo.ChangePasswordRequest;
-import com.daas.saas.investment.identity.vo.SignInRequest;
-import com.daas.saas.investment.identity.vo.UserToken;
-import com.daas.saas.investment.identity.vo.ValidateTokenRequest;
-import com.daas.saas.investment.identity.vo.VerifyEmailRequest;
+import com.idp.demo.identity.vo.ChangePasswordRequest;
+import com.idp.demo.identity.vo.SignInRequest;
+import com.idp.demo.identity.vo.UserToken;
+import com.idp.demo.identity.vo.ValidateTokenRequest;
+import com.idp.demo.identity.vo.VerifyEmailRequest;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

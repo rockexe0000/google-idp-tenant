@@ -1,11 +1,11 @@
-package com.daas.saas.investment.identity.exception;
+package com.idp.demo.identity.exception;
 
-import com.daas.saas.investment.identity.vo.GeneralResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import com.idp.demo.identity.vo.GeneralResponse;
 
 @RestControllerAdvice
 public class ExceptionHandlingController {
