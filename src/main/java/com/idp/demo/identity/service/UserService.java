@@ -6,6 +6,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import com.idp.demo.identity.exception.IdentityOperationException;
 import com.idp.demo.identity.vo.ChangePasswordRequest;
 import com.idp.demo.identity.vo.SignInRequest;
 import com.idp.demo.identity.vo.UserToken;
@@ -49,28 +50,21 @@ public class UserService {
     HttpEntity<ChangePasswordRequest> request = new HttpEntity<>(changePasswordRequest);
     String url = CHANGE_PASSWORD_URL + apiKey;
     ResponseEntity<Void> response = restTemplate.postForEntity(url, request, Void.class);
-    if (!response.getStatusCode().is2xxSuccessful()) {
-      return false;
-    }
-    return true;
+
+    return response.getStatusCode().is2xxSuccessful();
   }
 
 
   public boolean validateToken(ValidateTokenRequest validateTokenRequest) {
 
-
     HttpEntity<ValidateTokenRequest> request = new HttpEntity<>(validateTokenRequest);
 
+    if (!request.hasBody()) {
+      throw new IdentityOperationException("request.getBody() == null");
+    }
 
     gcpIdentityService.vaildateUser(request.getBody().getToken());
 
-
-
-    // String url = SIGN_IN_TOKEN + apiKey;
-    // ResponseEntity<Void> response = restTemplate.postForEntity(url, request, Void.class);
-    // if (!response.getStatusCode().is2xxSuccessful()) {
-    // return false;
-    // }
     return true;
   }
 
@@ -78,10 +72,8 @@ public class UserService {
     HttpEntity<VerifyEmailRequest> request = new HttpEntity<>(verifyEmailRequest);
     String url = VERIFY_EMAIL_URL + apiKey;
     ResponseEntity<Void> response = restTemplate.postForEntity(url, request, Void.class);
-    if (!response.getStatusCode().is2xxSuccessful()) {
-      return false;
-    }
-    return true;
+
+    return response.getStatusCode().is2xxSuccessful();
   }
 
 
