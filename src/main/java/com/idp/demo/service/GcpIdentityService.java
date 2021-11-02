@@ -1,22 +1,23 @@
-package com.idp.demo.identity.service;
+package com.idp.demo.service;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.Optional;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.env.Environment;
-import org.springframework.stereotype.Service;
+
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.UserRecord;
-import com.idp.demo.identity.exception.IdentityOperationException;
+import com.idp.demo.exception.IdentityOperationException;
 import com.idp.demo.identity.vo.CreateUserRequest;
 import com.idp.demo.identity.vo.User;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
+import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
@@ -26,12 +27,18 @@ public class GcpIdentityService {
   private FirebaseAuth firebaseAuth;
 
   @Autowired
-  public GcpIdentityService(@Value("${gcp.identity.authDomain}") String authDomain,
-      @Value("${spring.application.name}") String appName, Environment env) throws IOException {
-    FirebaseOptions options = FirebaseOptions.builder()
-        .setCredentials(GoogleCredentials
-            .fromStream(new FileInputStream(env.getProperty("GOOGLE_APPLICATION_CREDENTIALS"))))
-        .setDatabaseUrl(authDomain).build();
+  public GcpIdentityService(
+      @Value("${gcp.identity.authDomain}") String authDomain,
+      @Value("${spring.application.name}") String appName,
+      Environment env)
+      throws IOException {
+    FirebaseOptions options =
+        FirebaseOptions.builder()
+            .setCredentials(
+                GoogleCredentials.fromStream(
+                    new FileInputStream(env.getProperty("GOOGLE_APPLICATION_CREDENTIALS"))))
+            .setDatabaseUrl(authDomain)
+            .build();
     firebaseApp = FirebaseApp.initializeApp(options, appName);
     log.info("FirebaseApp name: {}", firebaseApp.getName());
 
@@ -63,15 +70,21 @@ public class GcpIdentityService {
   }
 
   private User transformTo(UserRecord userRecord) {
-    return User.builder().email(userRecord.getEmail()).displayName(userRecord.getDisplayName())
-        .uid(userRecord.getUid()).build();
+    return User.builder()
+        .email(userRecord.getEmail())
+        .displayName(userRecord.getDisplayName())
+        .uid(userRecord.getUid())
+        .build();
   }
 
   public User createUser(CreateUserRequest createUserRequest) {
     UserRecord.CreateRequest request =
-        new UserRecord.CreateRequest().setEmail(createUserRequest.getEmail())
-            .setEmailVerified(false).setPassword(createUserRequest.getPassword())
-            .setDisplayName(createUserRequest.getDisplayName()).setDisabled(false);
+        new UserRecord.CreateRequest()
+            .setEmail(createUserRequest.getEmail())
+            .setEmailVerified(false)
+            .setPassword(createUserRequest.getPassword())
+            .setDisplayName(createUserRequest.getDisplayName())
+            .setDisabled(false);
 
     UserRecord userRecord = null;
     try {
@@ -80,13 +93,11 @@ public class GcpIdentityService {
       log.error("Create a user failed, email: {}", createUserRequest.getEmail(), e);
       throw new IdentityOperationException(e.getMessage());
     }
-    log.info("Successfully created new user: {}, uid: {}", userRecord.getEmail(),
-        userRecord.getUid());
+    log.info(
+        "Successfully created new user: {}, uid: {}", userRecord.getEmail(), userRecord.getUid());
 
     return transformTo(userRecord);
   }
-
-
 
   public void deleteUser(String uid) {
     try {
@@ -97,11 +108,9 @@ public class GcpIdentityService {
     }
   }
 
-
   public void vaildateUser(String idToken) {
     try {
       var firebaseToken = firebaseAuth.verifyIdToken(idToken);
-
 
       firebaseToken.getClaims();
       firebaseToken.getEmail();
@@ -118,15 +127,11 @@ public class GcpIdentityService {
       log.debug("firebaseToken.getPicture()=[" + firebaseToken.getPicture() + "]");
       log.debug("firebaseToken.getUid()=[" + firebaseToken.getUid() + "]");
 
-
-
     } catch (FirebaseAuthException e) {
       log.error("Vaildate a user failed, idToken: {}", idToken, e);
       throw new IdentityOperationException(e.getMessage());
     }
   }
-
-
 
   public FirebaseApp getFirebaseApp() {
     return firebaseApp;

@@ -1,18 +1,19 @@
-package com.idp.demo.identity.service;
+package com.idp.demo.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
-import com.idp.demo.identity.exception.IdentityOperationException;
+
+import com.idp.demo.exception.IdentityOperationException;
 import com.idp.demo.identity.vo.ChangePasswordRequest;
 import com.idp.demo.identity.vo.SignInRequest;
 import com.idp.demo.identity.vo.UserToken;
 import com.idp.demo.identity.vo.ValidateTokenRequest;
 import com.idp.demo.identity.vo.VerifyEmailRequest;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 @Slf4j
 @Service
@@ -30,11 +31,9 @@ public class UserService {
   @Value("${gcp.identity.apiKey}")
   String apiKey;
 
-  @Autowired
-  GcpIdentityService gcpIdentityService;
+  @Autowired GcpIdentityService gcpIdentityService;
 
-  @Autowired
-  RestTemplate restTemplate;
+  @Autowired RestTemplate restTemplate;
 
   public UserToken signIn(SignInRequest signInRequest) {
     HttpEntity<SignInRequest> request = new HttpEntity<>(signInRequest);
@@ -53,7 +52,6 @@ public class UserService {
 
     return response.getStatusCode().is2xxSuccessful();
   }
-
 
   public boolean validateToken(ValidateTokenRequest validateTokenRequest) {
 
@@ -75,6 +73,4 @@ public class UserService {
 
     return response.getStatusCode().is2xxSuccessful();
   }
-
-
 }

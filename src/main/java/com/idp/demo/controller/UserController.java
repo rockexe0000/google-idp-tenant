@@ -1,5 +1,15 @@
-package com.idp.demo.identity.controller;
+package com.idp.demo.controller;
 
+
+import com.idp.demo.identity.vo.ChangePasswordRequest;
+import com.idp.demo.identity.vo.CreateUserRequest;
+import com.idp.demo.identity.vo.SignInRequest;
+import com.idp.demo.identity.vo.User;
+import com.idp.demo.identity.vo.UserToken;
+import com.idp.demo.identity.vo.ValidateTokenRequest;
+import com.idp.demo.identity.vo.VerifyEmailRequest;
+import com.idp.demo.service.GcpIdentityService;
+import com.idp.demo.service.UserService;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,26 +24,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import com.idp.demo.identity.service.GcpIdentityService;
-import com.idp.demo.identity.service.UserService;
-import com.idp.demo.identity.vo.ChangePasswordRequest;
-import com.idp.demo.identity.vo.CreateUserRequest;
-import com.idp.demo.identity.vo.SignInRequest;
-import com.idp.demo.identity.vo.User;
-import com.idp.demo.identity.vo.UserToken;
-import com.idp.demo.identity.vo.ValidateTokenRequest;
-import com.idp.demo.identity.vo.VerifyEmailRequest;
 
 @CrossOrigin(maxAge = 3600)
 @RestController
 @RequestMapping("/users")
 public class UserController {
 
-  @Autowired
-  UserService userService;
+  @Autowired UserService userService;
 
-  @Autowired
-  GcpIdentityService gcpIdentityService;
+  @Autowired GcpIdentityService gcpIdentityService;
 
   @GetMapping
   public User getUser(@RequestParam(value = "email", defaultValue = "") String email) {
@@ -74,7 +73,6 @@ public class UserController {
     }
     return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
   }
-
 
   @PostMapping
   public User createUser(@Valid @RequestBody CreateUserRequest createUserRequest) {

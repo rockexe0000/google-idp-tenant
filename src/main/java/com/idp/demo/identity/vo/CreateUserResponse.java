@@ -1,5 +1,6 @@
 package com.idp.demo.identity.vo;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,10 +11,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateUserResponse {
-    private String idToken;
-    private String localId;
-    private String email;
-    private String displayName;
-    private String refreshToken;
-    private String expiresIn;
+  private String idToken;
+  private String localId;
+  private String email;
+  private String displayName;
+  private String refreshToken;
+  private String expiresIn;
 }

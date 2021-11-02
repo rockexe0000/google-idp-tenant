@@ -1,6 +1,15 @@
-package com.idp.demo.identity.service;
+package com.idp.demo.service;
 
+
+import com.google.auth.oauth2.AccessToken;
+import com.google.auth.oauth2.GoogleCredentials;
+import com.idp.demo.identity.vo.CreateTenantRequest;
+import com.idp.demo.identity.vo.CreateTenantUserRequest;
+import com.idp.demo.identity.vo.CreateUserResponse;
+import com.idp.demo.identity.vo.TenantListResponse;
+import com.idp.demo.identity.vo.TenantResponse;
 import java.io.IOException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -10,14 +19,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import com.google.auth.oauth2.AccessToken;
-import com.google.auth.oauth2.GoogleCredentials;
-import com.idp.demo.identity.vo.CreateTenantRequest;
-import com.idp.demo.identity.vo.CreateTenantUserRequest;
-import com.idp.demo.identity.vo.CreateUserResponse;
-import com.idp.demo.identity.vo.TenantListResponse;
-import com.idp.demo.identity.vo.TenantResponse;
-import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
@@ -29,7 +30,9 @@ public class TenantService {
   private String tenantURI;
 
   @Autowired
-  public TenantService(GoogleCredentials googleCredentials, RestTemplate restTemplate,
+  public TenantService(
+      GoogleCredentials googleCredentials,
+      RestTemplate restTemplate,
       @Value("${gcp.identity.endpoint}") String endpoint,
       @Value("${gcp.identity.project}") String project) {
     this.googleCredentials = googleCredentials;
@@ -50,15 +53,20 @@ public class TenantService {
   public TenantListResponse listTenants() {
     String token = getToken();
     HttpHeaders headers = createAuthHeaders(token);
-    ResponseEntity<TenantListResponse> response = restTemplate.exchange(tenantURI, HttpMethod.GET,
-        new HttpEntity<>(headers), TenantListResponse.class);
+    ResponseEntity<TenantListResponse> response =
+        restTemplate.exchange(
+            tenantURI, HttpMethod.GET, new HttpEntity<>(headers), TenantListResponse.class);
     return response.getBody();
   }
 
-  public CreateUserResponse createTenantUser(String projectId, String tenantId,
-      CreateTenantUserRequest createTenantRequest) {
-    String url = "https://identitytoolkit.googleapis.com/v1/projects/" + projectId + "/tenants/"
-        + tenantId + "/accounts";
+  public CreateUserResponse createTenantUser(
+      String projectId, String tenantId, CreateTenantUserRequest createTenantRequest) {
+    String url =
+        "https://identitytoolkit.googleapis.com/v1/projects/"
+            + projectId
+            + "/tenants/"
+            + tenantId
+            + "/accounts";
     String token = getToken();
     HttpHeaders headers = createAuthHeaders(token);
     HttpEntity<CreateTenantUserRequest> request = new HttpEntity<>(createTenantRequest, headers);
@@ -97,6 +105,4 @@ public class TenantService {
       log.warn("Refresh credential failed!", e);
     }
   }
-
-
 }
