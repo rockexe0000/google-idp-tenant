@@ -1,4 +1,4 @@
-# identity-service
+# google-idp-tenant
 
 This service uses the google identity platform for multi-tenant user management and authentication.
 
@@ -21,7 +21,7 @@ export GOOGLE_APPLICATION_CREDENTIALS={your-service-account-key.json}
 ```
 
 
-## Identity-Service Project
+## google-idp-tenant Project
 ### Dev tools
 - Java 11
 - Gradle
@@ -38,8 +38,8 @@ export GOOGLE_APPLICATION_CREDENTIALS={your-service-account-key.json}
 ./gradlew bootRun
 
 # run app by using Jar
-java -jar build/libs/identity-service-0.0.1.jar
+java -jar build/libs/google-idp-tenant-0.0.1.jar
 ```
 
 ### APIs & doc
-- Swagger doc: http://localhost:8081/identity/swagger-ui.html
+- Swagger doc: http://localhost:8080/swagger-ui/index.html#/

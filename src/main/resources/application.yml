@@ -2,7 +2,7 @@ spring:
   profiles:
     active: "local"
   application:
-    name: identity-service
+    name: google-idp-tenant
 
 server:
   port: 8080
